@@ -1,1 +1,27 @@
-const _0x536c4e=_0x730e;(function(_0x132aab,_0x1fc9b9){const _0x432551=_0x730e,_0x11dff8=_0x132aab();while(!![]){try{const _0xd0b9d9=-parseInt(_0x432551(0x18e))/0x1*(parseInt(_0x432551(0x18d))/0x2)+-parseInt(_0x432551(0x195))/0x3+-parseInt(_0x432551(0x188))/0x4*(parseInt(_0x432551(0x196))/0x5)+parseInt(_0x432551(0x19a))/0x6*(-parseInt(_0x432551(0x194))/0x7)+-parseInt(_0x432551(0x193))/0x8+-parseInt(_0x432551(0x197))/0x9*(parseInt(_0x432551(0x186))/0xa)+parseInt(_0x432551(0x18f))/0xb*(parseInt(_0x432551(0x18c))/0xc);if(_0xd0b9d9===_0x1fc9b9)break;else _0x11dff8['push'](_0x11dff8['shift']());}catch(_0x4f980f){_0x11dff8['push'](_0x11dff8['shift']());}}}(_0x5a51,0xa0f6d));function _0x730e(_0x1ef5d3,_0x1d0c71){const _0x5a5133=_0x5a51();return _0x730e=function(_0x730ea5,_0x554022){_0x730ea5=_0x730ea5-0x186;let _0xcde9d1=_0x5a5133[_0x730ea5];return _0xcde9d1;},_0x730e(_0x1ef5d3,_0x1d0c71);}const mega=require(_0x536c4e(0x191)),auth={'email':'levanterbass@gmail.com','password':_0x536c4e(0x190),'userAgent':'Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/42.0.2311.135\x20Safari/537.36\x20Edge/12.246'},upload=(_0x25dbce,_0x2077f8)=>{return new Promise((_0x2dc590,_0x512964)=>{const _0x1bc673=_0x730e;try{const _0x13e1d2=new mega[(_0x1bc673(0x18b))](auth,()=>{const _0x46e392=_0x1bc673;_0x25dbce[_0x46e392(0x189)](_0x13e1d2[_0x46e392(0x199)]({'name':_0x2077f8,'allowUploadBuffering':!![]})),_0x13e1d2['on'](_0x46e392(0x18a),_0x8556c1=>{const _0x3f56e4=_0x46e392;_0x8556c1[_0x3f56e4(0x198)]((_0x518088,_0x4a05a1)=>{const _0x2bfb56=_0x3f56e4;if(_0x518088)throw _0x518088;_0x13e1d2[_0x2bfb56(0x187)](),_0x2dc590(_0x4a05a1);});});});}catch(_0x27fe5c){_0x512964(_0x27fe5c);}});};function _0x5a51(){const _0xf3562a=['584526MVZUYe','60vpmony','close','358340jXgIMJ','pipe','add','Storage','12PEPLUj','69814eCdOEO','31CISmnq','60895043niSVLb','E3VZz_a5.8TRFmT','megajs','exports','7006616jCnQTq','63ZvfQeO','374814uioPwp','35sxovUa','1934757tVncmV','link','upload'];_0x5a51=function(){return _0xf3562a;};return _0x5a51();}module[_0x536c4e(0x192)]={'upload':upload};
+const mega = require("megajs");
+const auth = {
+    email: 'levanterbass@gmail.com',
+    password: 'E3VZz_a5.8TRFmT',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'
+}
+
+const upload = (data, name) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const storage = new mega.Storage(auth, () => {
+                data.pipe(storage.upload({name: name, allowUploadBuffering: true}));
+                storage.on("add", (file) => {
+                    file.link((err, url) => {
+                        if (err) throw err;
+                        storage.close()
+                        resolve(url);
+                    });
+                });
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
+};
+
+module.exports = { upload };
